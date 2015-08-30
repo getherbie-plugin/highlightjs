@@ -5,19 +5,40 @@ use Herbie\Hook;
 
 class HighlightJsPlugin
 {
-    /**
-     * @return array
-     */
+    /** @var array */
+    protected static $config;
+
     public static function install()
     {
-        $config = DI::get('Config');
+        // config
+        $defaults = DI::get('Config')->get('plugins.config.highlightjs', []);
+        $config = array_merge([
+            'stylesheets' => '@plugin/highlightjs/assets/styles/',
+            'javascript' => '@plugin/highlightjs/assets/highlight.pack.js',
+            'javascript_init' => '@plugin/highlightjs/assets/highlightjs.js',
+            'html' => '<pre><code class="{class}">{content}</code></pre>',
+            'style' => 'default'
+        ], $defaults);
+
+        /** @var Herbie\Assets $assets */
         $assets = DI::get('Assets');
-        if ((bool)$config->get('plugins.config.highlightjs.shortcode', true)) {
-            $assets->addJs("@plugin/highlightjs/assets/highlight.pack.js");
-            $assets->addJs("@plugin/highlightjs/assets/highlightjs.js");
-            $assets->addCss("@plugin/highlightjs/assets/styles/zenburn.css");
-            Hook::attach('shortcodeInitialized', ['HighlightJsPlugin', 'addShortcode']);
+
+        if (false !== $config['stylesheets']) {
+            $style = empty($config['style']) ? 'default' : $config['style'];
+            $stylesheet = sprintf('%s/%s.css', rtrim($config['stylesheets']) . '/', $style);
+            $assets->addCss($stylesheet);
         }
+
+        if (false !== $config['javascript']) {
+            $assets->addJs($config['javascript']);
+        }
+
+        if (false !== $config['javascript_init']) {
+            $assets->addJs($config['javascript_init']);
+        }
+
+        Hook::attach('shortcodeInitialized', ['HighlightJsPlugin', 'addShortcode']);
+
     }
 
     public static function addShortcode($shortcode)
@@ -28,7 +49,7 @@ class HighlightJsPlugin
     public static function codeShortcode($options, $content)
     {
         $name = empty($options[0]) ? 'text' : $options[0];
-        return sprintf('<pre><code class="%s">%s</code></pre>', $name, htmlentities(trim($content)));
+        return strtr(static::$config['html'], ['{class}' => $name, '{content}' => htmlentities(trim($content))]);
     }
 
 }
