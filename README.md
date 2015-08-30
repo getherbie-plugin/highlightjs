@@ -1,7 +1,14 @@
 # Herbie HighlightJS Plugin
 
 `HighlightJS` ist ein [Herbie](http://github.com/getherbie/herbie) Plugin, das den JavaScript basierten Code 
-Syntax-Highlighter [Highlight.js](https://highlightjs.org/) in deine Website einbindet.
+Syntax-Highlighter [Highlight.js](https://highlightjs.org/) in deine Website einbindet. Highlight.js bringt die 
+folgenden Features mit:
+
+- 130 Sprachen und 65 Stile
+- automatische Spracherkennung
+- funktioniert mit jedem Markup
+- kompatibel mit jedem JS-Framework
+- Multi-Sprachen Code Highlighting
 
 
 ## Installation

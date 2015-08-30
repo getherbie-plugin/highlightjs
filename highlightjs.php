@@ -19,6 +19,7 @@ class HighlightJsPlugin
             'html' => '<pre><code class="{class}">{content}</code></pre>',
             'style' => 'default'
         ], $defaults);
+        static::$config = $config;
 
         /** @var Herbie\Assets $assets */
         $assets = DI::get('Assets');
