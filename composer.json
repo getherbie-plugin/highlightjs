@@ -1,6 +1,6 @@
 {
     "name": "getherbie/plugin-highlightjs",
-    "homepage": "http://www.getherbie.org",
+    "homepage": "https://www.getherbie.org",
     "description": "Syntax Highlighting Plugin for Herbie",
     "keywords": ["herbie", "plugin", "highlight", "highlightjs"],
     "type": "herbie-plugin",
