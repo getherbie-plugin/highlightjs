@@ -1,3 +1,10 @@
+> [!WARNING]
+> **Deprecated.** This plugin bundles outdated Highlight.js assets and the `[code]` shortcode.
+> Herbie 3 loads Highlight.js directly in the theme and applies it to
+> `pre code[class*=language-]` — no plugin required.
+>
+> See: https://herbie.tebe.ch/doc/contents/markdown
+
 # Herbie HighlightJS Plugin
 
 `HighlightJS` ist ein [Herbie](http://github.com/getherbie/herbie) Plugin, das den JavaScript basierten Code 
